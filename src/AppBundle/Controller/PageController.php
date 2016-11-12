@@ -22,34 +22,43 @@ class PageController extends Controller
      */
     public function contactAction()
     {
-        
-        return $this->render('page/contact.html.twig');
+        $contact="Kontakt";
+        return $this->render('page/contact.html.twig', array('contact' =>$contact));
     }
     
     /**
-     * @Route("/kontakt", name="contactpage")
+     * @Route("/samochody", name="carpage")
      */
-    public function contactAction()
+    public function carAction()
     {
         
-        return $this->render('page/contact.html.twig');
+        return $this->render('page/car.html.twig');
     }
     
     /**
-     * @Route("/kontakt", name="contactpage")
+     * @Route("/warunku-najmu", name="detailpage")
      */
-    public function contactAction()
+    public function detailAction()
     {
         
-        return $this->render('page/contact.html.twig');
+        return $this->render('page/detail.html.twig');
     }
     
     /**
-     * @Route("/kontakt", name="contactpage")
+     * @Route("/cennik", name="pricepage")
      */
-    public function contactAction()
+    public function priceAction()
     {
         
-        return $this->render('page/contact.html.twig');
+        return $this->render('page/price.html.twig');
+    }
+    
+    /**
+     * @Route("/punkty-odbioru", name="placepage")
+     */
+    public function placeAction()
+    {
+        
+        return $this->render('page/place.html.twig');
     }
 }

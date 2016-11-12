@@ -13,24 +13,28 @@
 <body>
 
     <div id="container">
-	
-        <div id="logo">           
-        </div>
 		
         <div id="menu">
-		
+            
+            <div id="logo">
+            <img src="{{ asset('bundles/framework/images/c.jpg') }}">
+            </div>
+            
+                <div id="login">
+                    login
+                </div>
                 <div id="menu_content">
 				
                     <ul id="menu_list">
-                        <li><a href="#">STRONA GŁÓWNA</a></li>
-                        <li><a href="#">SAMOCHODY</a></li>
-                        <li><a href="#">CENNIK</a></li>
-                        <li><a href="#">WARUNKI NAJMU</a></li>
-                        <li><a href="#">PUNKTY ODBIORU</a></li>
+                        <li><a href="{{ path('homepage') }}">STRONA GŁÓWNA</a></li>
+                        <li><a href="{{ path('carpage') }}">SAMOCHODY</a></li>
+                        <li><a href="{{ path('pricepage') }}">CENNIK</a></li>
+                        <li><a href="{{ path('detailpage') }}">WARUNKI NAJMU</a></li>
+                        <li><a href="{{ path('placepage') }}">PUNKTY ODBIORU</a></li>
                         <li><a href="{{ path('contactpage') }}">KONTAKT</a></li>
                     </ul>
 					
-                </div>
+                </div> 
 				
         </div>
             
@@ -42,8 +46,6 @@
         </div>
 		
 		<div id="footer">
-            <div >
-            </div>	
 		</div>
 		
 		<div id="companyName"> &copy Wszelkie prawa zastrzeżone Rent a Car sp. z o.o. 2016
