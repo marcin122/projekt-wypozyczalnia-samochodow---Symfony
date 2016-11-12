@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	
+	<title>Rent a Car</title>
+    <link href={{ asset('bundles/framework/css/style.css')}} rel="stylesheet" type="text/css" />
+    <link href='https://fonts.googleapis.com/css?family=Noto+Sans&subset=latin,latin-ext' rel='stylesheet' type='text/css' />
+	
+</head>
+
+<body>
+
+    <div id="container">
+	
+        <div id="logo">           
+        </div>
+		
+        <div id="menu">
+		
+                <div id="menu_content">
+				
+                    <ul id="menu_list">
+                        <li><a href="#">STRONA GŁÓWNA</a></li>
+                        <li><a href="#">SAMOCHODY</a></li>
+                        <li><a href="#">CENNIK</a></li>
+                        <li><a href="#">WARUNKI NAJMU</a></li>
+                        <li><a href="#">PUNKTY ODBIORU</a></li>
+                        <li><a href="{{ path('contactpage') }}">KONTAKT</a></li>
+                    </ul>
+					
+                </div>
+				
+        </div>
+            
+        <div id="content">
+		
+        {% block content %}
+        {% endblock %}
+		
+        </div>
+		
+		<div id="footer">
+            <div >
+            </div>	
+		</div>
+		
+		<div id="companyName"> &copy Wszelkie prawa zastrzeżone Rent a Car sp. z o.o. 2016
+		</div>
+	
+    </div>
+        
+	
+</body>
+</html>
