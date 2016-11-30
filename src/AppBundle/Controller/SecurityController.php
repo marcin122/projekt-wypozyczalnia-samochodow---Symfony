@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\UserType;
 use AppBundle\Entity\User;
+use Symfony\Component\HttpFoundation\Response;
 
 class SecurityController extends Controller
 {
@@ -38,8 +39,16 @@ class SecurityController extends Controller
         $form=$this->createForm(UserType::class, $user);
         
         $form->handleRequest($request);
+     
         if($form->isSubmitted())
         {
+            $validator=$this->get('validator');
+            $errors=$validator->validate($user);
+            
+            if(count($errors)>0){
+                return $this->render('security/registrationError.html.twig', array('errors' => $errors, 'form'=>$form->createView()));
+            }
+            
             $password=$this->get('security.password_encoder')->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($password);
             

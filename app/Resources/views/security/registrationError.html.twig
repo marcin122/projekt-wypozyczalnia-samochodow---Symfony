@@ -27,6 +27,11 @@
             {{ form_row(form.miasto) }}
             {{ form_row(form.kraj) }}
             {{ form_row(form.nr_telefonu) }}
+            
+            {#{% for error in errors %}
+                <span style="color: red;">{{ error.message }}</span><br>
+            {% endfor %}#}
+            
             <br>
             <button type="submit">Rejestracja</button>
         {{ form_end(form) }}

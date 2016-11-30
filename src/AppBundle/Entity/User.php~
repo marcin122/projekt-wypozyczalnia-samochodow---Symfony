@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
 * @ORM\Entity
@@ -20,29 +21,67 @@ class User implements UserInterface, \Serializable
     
     /**
     * @ORM\Column(type="string", length=65, unique=true)
+    * @Assert\NotBlank()
     */
-    private $userName;
+    private $login;
     
     /**
     * @ORM\Column(type="string", length=65, unique=true)
+    * @Assert\Email(message = "Adres email nie jest poprawny", checkMX = true)
     */
-    private $email;
+    private $AdresEmail;
     
     /**
     * @ORM\Column(type="string", length=64)
+    * @Assert\NotBlank()
+    * @Assert\Length(min=4)
     */
-    private $password;
+    private $haslo;
     
     /**
     * @ORM\Column(type="string", length=65)
     */
-    private $firstName;
+    private $imie;
     
     /**
     * @ORM\Column(type="string", length=65)
     */
-    private $lastName;
+    private $nazwisko;
     
+    /**
+    * @ORM\Column(type="string", length=11)
+    */
+    private $Pesel;
+    
+    /**
+    * @ORM\Column(type="string", length=65)
+    */
+    private $ulica;
+    
+    /**
+    * @ORM\Column(type="string", length=4)
+    */
+    private $nr_domu_nr_mieszkania;
+    
+    /**
+    * @ORM\Column(type="string", length=6)
+    */
+    private $kod_pocztowy;
+    
+    /**
+    * @ORM\Column(type="string", length=65)
+    */
+    private $miasto;
+    
+    /**
+    * @ORM\Column(type="string", length=65)
+    */
+    private $kraj;
+    
+    /**
+    * @ORM\Column(type="string", length=9)
+    */
+    private $nr_telefonu;
     
     /**
     * @ORM\Column(name="is_active", type="boolean")
@@ -56,11 +95,15 @@ class User implements UserInterface, \Serializable
     
     public function getUserName()
     {
-        return $this->userName;
+        return $this->login;
     }
+    
+    /**
+    * @Assert\IsTrue(message="Haslo jest za krotkie")
+    */
     public function getPassword()
     {
-        return $this->password;
+        return $this->haslo;
     }
     
     public function getSalt()
@@ -70,7 +113,7 @@ class User implements UserInterface, \Serializable
     
     public function getRoles()
     {
-        return array('ROLE_USER');
+        return array('ROLE_USER', 'ROLE_ADMIN');
     }
     
     public function eraseCredentials()
@@ -173,9 +216,9 @@ class User implements UserInterface, \Serializable
      * @param string $firstName
      * @return User
      */
-    public function setFirstName($firstName)
+    public function setImie($firstName)
     {
-        $this->firstName = $firstName;
+        $this->imie = $firstName;
 
         return $this;
     }
@@ -185,9 +228,9 @@ class User implements UserInterface, \Serializable
      *
      * @return string 
      */
-    public function getFirstName()
+    public function getImie()
     {
-        return $this->firstName;
+        return $this->imie;
     }
 
     /**
@@ -196,9 +239,9 @@ class User implements UserInterface, \Serializable
      * @param string $lastName
      * @return User
      */
-    public function setLastName($lastName)
+    public function setNazwisko($lastName)
     {
-        $this->lastName = $lastName;
+        $this->nazwisko = $lastName;
 
         return $this;
     }
@@ -208,9 +251,9 @@ class User implements UserInterface, \Serializable
      *
      * @return string 
      */
-    public function getLastName()
+    public function getNazwisko()
     {
-        return $this->lastName;
+        return $this->nazwisko;
     }
 
     /**
@@ -235,4 +278,212 @@ class User implements UserInterface, \Serializable
     {
         return $this->isActive;
     }
+
+    /**
+     * Set login
+     *
+     * @param string $login
+     * @return User
+     */
+    public function setLogin($login)
+    {
+        $this->login = $login;
+
+        return $this;
+    }
+
+    /**
+     * Get login
+     *
+     * @return string 
+     */
+    public function getLogin()
+    {
+        return $this->login;
+    }
+
+    /**
+     * Set AdresEmail
+     *
+     * @param string $adresEmail
+     * @return User
+     */
+    public function setAdresEmail($adresEmail)
+    {
+        $this->AdresEmail = $adresEmail;
+
+        return $this;
+    }
+
+    /**
+     * Get AdresEmail
+     *
+     * @return string 
+     */
+    public function getAdresEmail()
+    {
+        return $this->AdresEmail;
+    }
+
+    /**
+     * Set haslo
+     *
+     * @param string $haslo
+     * @return User
+     */
+    public function setHaslo($haslo)
+    {
+        $this->haslo = $haslo;
+
+        return $this;
+    }
+
+    /**
+     * Get haslo
+     *
+     * @return string 
+     */
+    public function getHaslo()
+    {
+        return $this->haslo;
+    }
+
+    /**
+     * Set ulica
+     *
+     * @param string $ulica
+     * @return User
+     */
+    public function setUlica($ulica)
+    {
+        $this->ulica = $ulica;
+
+        return $this;
+    }
+
+    /**
+     * Get ulica
+     *
+     * @return string 
+     */
+    public function getUlica()
+    {
+        return $this->ulica;
+    }
+
+    /**
+     * Set nr_domu_nr_mieszkania
+     *
+     * @param string $nrDomuNrMieszkania
+     * @return User
+     */
+    public function setNrDomuNrMieszkania($nrDomuNrMieszkania)
+    {
+        $this->nr_domu_nr_mieszkania = $nrDomuNrMieszkania;
+
+        return $this;
+    }
+
+    /**
+     * Get nr_domu_nr_mieszkania
+     *
+     * @return string 
+     */
+    public function getNrDomuNrMieszkania()
+    {
+        return $this->nr_domu_nr_mieszkania;
+    }
+
+    /**
+     * Set kod_pocztowy
+     *
+     * @param string $kodPocztowy
+     * @return User
+     */
+    public function setKodPocztowy($kodPocztowy)
+    {
+        $this->kod_pocztowy = $kodPocztowy;
+
+        return $this;
+    }
+
+    /**
+     * Get kod_pocztowy
+     *
+     * @return string 
+     */
+    public function getKodPocztowy()
+    {
+        return $this->kod_pocztowy;
+    }
+
+    /**
+     * Set miasto
+     *
+     * @param string $miasto
+     * @return User
+     */
+    public function setMiasto($miasto)
+    {
+        $this->miasto = $miasto;
+
+        return $this;
+    }
+
+    /**
+     * Get miasto
+     *
+     * @return string 
+     */
+    public function getMiasto()
+    {
+        return $this->miasto;
+    }
+
+    /**
+     * Set kraj
+     *
+     * @param string $kraj
+     * @return User
+     */
+    public function setKraj($kraj)
+    {
+        $this->kraj = $kraj;
+
+        return $this;
+    }
+
+    /**
+     * Get kraj
+     *
+     * @return string 
+     */
+    public function getKraj()
+    {
+        return $this->kraj;
+    }
+
+    /**
+     * Set nr_telefonu
+     *
+     * @param integer $nrTelefonu
+     * @return User
+     */
+    public function setNrTelefonu($nrTelefonu)
+    {
+        $this->nr_telefonu = $nrTelefonu;
+
+        return $this;
+    }
+
+    /**
+     * Get nr_telefonu
+     *
+     * @return integer 
+     */
+    public function getNrTelefonu()
+    {
+        return $this->nr_telefonu;
+    }
+
 }

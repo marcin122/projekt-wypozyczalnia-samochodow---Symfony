@@ -2,6 +2,8 @@
 
 {% block content %}	
 
+<div id="loginForm">
+    <span id="loginTitle">Logowanie</span><br>
 {% if error %}
     <div style="color:red;">
         {{ error.messageKey|trans(error.messageData, 'security') }}
@@ -10,15 +12,16 @@
 
           <form action="{{ path('login') }}" method="post">
                 <label for="email">
-                    Adres e-mail:
+                    Login:
                 </label><br>                       
-                <input type="text" id="email" name="_username" placeholder="Podaj adres e-mail" value="{{ last_username }}">
+                <input type="text" id="email" name="_login" placeholder="Podaj login" value="{{ last_username }}">
                  <br>       
                 <label for="password">
                     Hasło:
                 </label><br>
-                <input type="password" id="password" name="_password" placeholder="Podaj hasło"><br>
+                <input type="password" id="password" name="_haslo" placeholder="Podaj hasło"><br><br>
                 <input type="submit" value="Zaloguj się">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
           </form>
-                
+</div>
 {% endblock %}
