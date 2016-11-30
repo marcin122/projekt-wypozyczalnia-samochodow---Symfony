@@ -9,7 +9,7 @@ security:
         our_db_provider:
             entity:
                 class: AppBundle:User
-                property: userName
+                property: login
     
     role_hierarchy:
         ROLE_ADMIN: [ROLE_USER]

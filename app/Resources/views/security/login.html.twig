@@ -11,15 +11,15 @@
 {% endif %}	
 
           <form action="{{ path('login') }}" method="post">
-                <label for="email">
+                <label for="login">
                     Login:
                 </label><br>                       
-                <input type="text" id="email" name="_login" placeholder="Podaj login" value="{{ last_username }}">
+                <input type="text" id="login" name="_username" placeholder="Podaj login" value="{{ last_username }}">
                  <br>       
-                <label for="password">
+                <label for="haslo">
                     Hasło:
                 </label><br>
-                <input type="password" id="password" name="_haslo" placeholder="Podaj hasło"><br><br>
+                <input type="password" id="haslo" name="_password" placeholder="Podaj hasło"><br><br>
                 <input type="submit" value="Zaloguj się">
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
           </form>

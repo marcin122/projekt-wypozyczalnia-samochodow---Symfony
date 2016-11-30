@@ -18,10 +18,8 @@ class SecurityController extends Controller
      {
          $authenticationUtils = $this->get('security.authentication_utils');
 
-        // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
 
-        // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
         return $this->render('security/login.html.twig', array(
@@ -50,7 +48,7 @@ class SecurityController extends Controller
             }
             
             $password=$this->get('security.password_encoder')->encodePassword($user, $user->getPlainPassword());
-            $user->setPassword($password);
+            $user->setHaslo($password);
             
             $em=$this->getDoctrine()->getManager();
             $em->persist($user);
