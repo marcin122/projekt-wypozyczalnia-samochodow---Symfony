@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+<form action="{{ path('order', {'car':car}) }}" method="POST">
+    
+    <div id="orderForm">
+        
+        <span id="orderTitle">Rezerwacja pojazdu</span><br> 
+        
+        Marka: {{ c.marka }}<br>
+        Model: {{ c.model }}<br>
+        Rok produkcji: {{ c.rokProd }}<br>
+        Przebieg: {{ c.przebieg }} km<br>
+        Rodzaj silnika: {{ c.rodzSilnika }}<br>
+        Pojemnosc silnika: {{ c.pojSilnika }}<br>      
+              
+        {{ form_start(form) }}
+            {{ form_row(form.facility) }}
+        {{ form_end(form) }}
+        
+        <button type="submit">Zarezerwuj</button> 
+    </div>
+</form>
+{% endblock %}

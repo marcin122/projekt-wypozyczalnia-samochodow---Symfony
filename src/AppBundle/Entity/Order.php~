@@ -1,0 +1,35 @@
+<?php
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+* @ORM\Entity
+* @ORM\Table(name="order")
+*/
+class Order{
+    /**
+    * @ORM\Column(type="integer")
+    * @ORM\Id
+    * @ORM\GeneratedValue(strategy="AUTO")
+    */
+    private $id;
+    
+     /**
+    * @ORM\ManyToOne(targetEntity="Car", inversedBy="orders")
+    * @ORM\JoinColumn(name="carId", referencedColumnName="id")
+    */
+    private $car;
+    
+    /**
+    * @ORM\ManyToOne(targetEntity="Facility", inversedBy="orders")
+    * @ORM\JoinColumn(name="facilityId", referencedColumnName="id")
+    */
+    private $facility;
+    
+    /**
+    * @ORM\ManyToOne(targetEntity="User", inversedBy="orders")
+    * @ORM\JoinColumn(name="userId", referencedColumnName="id")
+    */
+    private $user;
+}

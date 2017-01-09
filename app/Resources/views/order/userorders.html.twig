@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+
+    <div id="orderForm">
+        <span id="orderTitle">Panel klienta</span><br>
+        
+        {% for order in orders %}
+            Marka: {{ order.car.marka }}<br>
+            Model: {{ order.car.model }}<br>
+            Rok produkcji: {{ order.car.rokProd }}<br>
+            Przebieg: {{ order.car.przebieg }} km<br>
+            Rodzaj silnika: {{ order.car.rodzSilnika }}<br>
+            Pojemnosc silnika: {{ order.car.pojSilnika }}<br>
+            Doadatkowe wyposazenie: {{ order.facility.name }}<br>
+            <a href="{{ path('remove', {'order':order}) }}"><button>Rezygnuj</button></a>
+            <a href="{{ path('updatecarlist', {'order':order}) }}"><button>Zmien samochod</button></a>
+            <a href="{{ path('updatefac', {'order':order}) }}"><button>Zmien wyposazenie</button>
+            <A href="{{ path('pdf', {'order':order}) }}"><button>Pobierz potwierdzenie</button></a>
+            <hr>
+        {% endfor %}
+        
+    </div>
+
+{% endblock %}

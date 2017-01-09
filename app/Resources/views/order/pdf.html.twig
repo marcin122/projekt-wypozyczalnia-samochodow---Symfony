@@ -1,0 +1,15 @@
+{% block pdf %}
+
+Zamowienie nr 2016/{{ order.id }}<br><br>
+
+Wypozyczany samochod:<br> 
+        Marka: {{ order.car.marka }}<br>
+        Model: {{ order.car.model }}<br>
+        Rok produkcji: {{ order.car.rokProd }}<br>
+        Przebieg: {{ order.car.przebieg }} km<br>
+        Rodzaj silnika: {{ order.car.rodzSilnika }}<br>
+        Pojemnosc silnika: {{ order.car.pojSilnika }}<br><br>
+        
+Zamowione wyposazenie:<br> 
+        {{ order.facility.name }}
+{% endblock %}

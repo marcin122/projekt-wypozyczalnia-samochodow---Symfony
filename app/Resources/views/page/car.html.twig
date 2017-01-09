@@ -1,7 +1,55 @@
 {% extends 'base.html.twig' %}
 
-{% block content %}		
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/framework/js/find.js') }}"></script>
+    <script>
+        var loader = "{{ asset('bundles/framework/images/ajax-loader.gif') }}";
+        var ROOT_URL = "{{ url('ajaxcarpage')}}";
+    </script>
+{% endblock %}
 
-                <h1>Samochody</h1>
-                
+{% block content %} 
+
+    <div id="findCar">
+        {{ form_start(form) }}
+            {{ form_label(form.name, 'Wyszukaj samochod') }}
+            {{ form_row(form.name, {'attr': {'id': 'findCarTextField'}}) }}
+            {{ form_row(form.send, { 'label': 'Wyszukaj' }) }}
+        {{ form_end(form) }}
+        <div id="match"></div>
+    </div>
+    
+    <br>
+    
+
+    {% for car in cars %}
+   
+    
+        <div id="car">
+            
+            <div id="carPhoto">
+                <img id="carImg" alt="zdjecie samochodu" src={{ asset('bundles/framework/images/SkodaFabia.jpg') }} >           
+            </div>
+            
+            <div id="carDescription">
+                Marka: {{ car.marka }}<br>
+                Model: {{ car.model }}<br>
+                Rok produkcji: {{ car.rokProd }}<br>
+                Przebieg: {{ car.przebieg }}<br>
+                Rodzaj silnika: {{ car.rodzSilnika }}<br>
+                Pojemnosc silnika: {{ car.pojSilnika }}<br>
+            </div>
+            
+            <div id="orderButton">
+                {% if app.user %}
+                    <a href="{{ path('order', {'car':car}) }}"><button type="submit">Zamow</button></a>
+                {% else %}
+                    <a href="{{ path('login') }}"><button type="submit">Zamow</button></a>
+                {% endif %}
+            </div>
+            
+        </div>
+    {% endfor %}
+    
 {% endblock %}

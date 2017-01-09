@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+
+<div id="orderForm">
+    <span id="orderTitle">Zmiana pojazdu</span><br> 
+    {% for car in cars %}
+        Marka: {{ car.marka }}<br>
+        Model: {{ car.model }}<br>
+        Rok produkcji: {{ car.rokProd }}<br>
+        Przebieg: {{ car.przebieg }} km<br>
+        Rodzaj silnika: {{ car.rodzSilnika }}<br>
+        Pojemnosc silnika: {{ car.pojSilnika }}<br>       
+        <a href="{{ path('updatecar', {'order':order, 'car':car}) }}"><button>Zmien samochod</button></a> 
+        <hr>
+    {% endfor %}
+</div>
+
+{% endblock %}

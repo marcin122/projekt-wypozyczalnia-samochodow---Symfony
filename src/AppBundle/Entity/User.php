@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
 * @ORM\Entity
@@ -101,9 +102,16 @@ class User implements UserInterface, \Serializable
     */
     private $isActive;
     
+    /**
+    * @ORM\OneToMany(targetEntity="OrderCar", mappedBy="user")
+    */
+    private $orderUser;
+    
     public function __construct()
     {
         $this->isActive=true;
+        $this->orderUser=new ArrayCollection();
+    
     }
     
     public function getUserName()
@@ -176,124 +184,6 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * Set userName
-     *
-     * @param string $userName
-     * @return User
-     */
-    public function setUserName($userName)
-    {
-        $this->userName = $userName;
-
-        return $this;
-    }
-
-    /**
-     * Set email
-     *
-     * @param string $email
-     * @return User
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * Get email
-     *
-     * @return string 
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * Set password
-     *
-     * @param string $password
-     * @return User
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    /**
-     * Set firstName
-     *
-     * @param string $firstName
-     * @return User
-     */
-    public function setImie($firstName)
-    {
-        $this->imie = $firstName;
-
-        return $this;
-    }
-
-    /**
-     * Get firstName
-     *
-     * @return string 
-     */
-    public function getImie()
-    {
-        return $this->imie;
-    }
-
-    /**
-     * Set lastName
-     *
-     * @param string $lastName
-     * @return User
-     */
-    public function setNazwisko($lastName)
-    {
-        $this->nazwisko = $lastName;
-
-        return $this;
-    }
-
-    /**
-     * Get lastName
-     *
-     * @return string 
-     */
-    public function getNazwisko()
-    {
-        return $this->nazwisko;
-    }
-
-    /**
-     * Set isActive
-     *
-     * @param boolean $isActive
-     * @return User
-     */
-    public function setIsActive($isActive)
-    {
-        $this->isActive = $isActive;
-
-        return $this;
-    }
-
-    /**
-     * Get isActive
-     *
-     * @return boolean 
-     */
-    public function getIsActive()
-    {
-        return $this->isActive;
-    }
-
-    /**
      * Set login
      *
      * @param string $login
@@ -360,6 +250,75 @@ class User implements UserInterface, \Serializable
     public function getHaslo()
     {
         return $this->haslo;
+    }
+
+    /**
+     * Set imie
+     *
+     * @param string $imie
+     * @return User
+     */
+    public function setImie($imie)
+    {
+        $this->imie = $imie;
+
+        return $this;
+    }
+
+    /**
+     * Get imie
+     *
+     * @return string 
+     */
+    public function getImie()
+    {
+        return $this->imie;
+    }
+
+    /**
+     * Set nazwisko
+     *
+     * @param string $nazwisko
+     * @return User
+     */
+    public function setNazwisko($nazwisko)
+    {
+        $this->nazwisko = $nazwisko;
+
+        return $this;
+    }
+
+    /**
+     * Get nazwisko
+     *
+     * @return string 
+     */
+    public function getNazwisko()
+    {
+        return $this->nazwisko;
+    }
+
+    /**
+     * Set Pesel
+     *
+     * @param string $pesel
+     * @return User
+     */
+    public function setPesel($pesel)
+    {
+        $this->Pesel = $pesel;
+
+        return $this;
+    }
+
+    /**
+     * Get Pesel
+     *
+     * @return string 
+     */
+    public function getPesel()
+    {
+        return $this->Pesel;
     }
 
     /**
@@ -480,7 +439,7 @@ class User implements UserInterface, \Serializable
     /**
      * Set nr_telefonu
      *
-     * @param integer $nrTelefonu
+     * @param string $nrTelefonu
      * @return User
      */
     public function setNrTelefonu($nrTelefonu)
@@ -493,34 +452,66 @@ class User implements UserInterface, \Serializable
     /**
      * Get nr_telefonu
      *
-     * @return integer 
+     * @return string 
      */
     public function getNrTelefonu()
     {
         return $this->nr_telefonu;
     }
 
-
     /**
-     * Set Pesel
+     * Set isActive
      *
-     * @param string $pesel
+     * @param boolean $isActive
      * @return User
      */
-    public function setPesel($pesel)
+    public function setIsActive($isActive)
     {
-        $this->Pesel = $pesel;
+        $this->isActive = $isActive;
 
         return $this;
     }
 
     /**
-     * Get Pesel
+     * Get isActive
      *
-     * @return string 
+     * @return boolean 
      */
-    public function getPesel()
+    public function getIsActive()
     {
-        return $this->Pesel;
+        return $this->isActive;
+    }
+
+    /**
+     * Add orderUser
+     *
+     * @param \AppBundle\Entity\Order $orderUser
+     * @return User
+     */
+    public function addOrderUser(\AppBundle\Entity\OrderCar $orderUser)
+    {
+        $this->orderUser[] = $orderUser;
+
+        return $this;
+    }
+
+    /**
+     * Remove orderUser
+     *
+     * @param \AppBundle\Entity\Order $orderUser
+     */
+    public function removeOrderUser(\AppBundle\Entity\OrderCar $orderUser)
+    {
+        $this->orderUser->removeElement($orderUser);
+    }
+
+    /**
+     * Get orderUser
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getOrderUser()
+    {
+        return $this->orderUser;
     }
 }

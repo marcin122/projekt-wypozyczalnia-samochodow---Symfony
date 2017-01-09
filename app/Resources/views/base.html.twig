@@ -8,33 +8,52 @@
     <link href={{ asset('bundles/framework/css/style.css')}} rel="stylesheet" type="text/css" />
     <link href='https://fonts.googleapis.com/css?family=Noto+Sans&subset=latin,latin-ext' rel='stylesheet' type='text/css' />
 	
+    {% block javascripts %}
+        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    {% endblock %}
 </head>
 
 <body>
 
     <div id="container">
 		
+        <div id="menuContainer">
         <div id="menu">
             
             <div id="logo">
             <img src="{{ asset('bundles/framework/images/c.jpg') }}">
             </div>
+            
                 <div id="login">
-                    
+                    <a href="{{ path('homepage') }}"><div id="loginLogo">
+                        <img src="{{ asset('bundles/framework/images/logo.jpg') }}">
+                    </div></a>
+                    <div id="userBlock">
+                        {% if app.user %}
+                            <a href="{{ path('user') }}"<span style="color: dimgrey;">{{ app.user.login }} </span></a>
+                            <a href="{{ path('logout') }}"><button id="menuButton">Wyloguj sie</button></a>
+                        {% else %}
+                            <form action="{{ path('login') }}" method="post">
+                                <input id="menuLogin" type="text" id="login" name="_username" placeholder="Podaj login">            
+                                <input id="menuLogin" type="password" id="haslo" name="_password" placeholder="Podaj hasło">
+                                <input id="menuButton"type="submit" value="Zaloguj się">
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                            </form>
+                        {% endif %}
+                    </div>
                 </div>
+                
                 <div id="menu_content">
 				
                     <ul id="menu_list">
-                        <li><a href="{{ path('homepage') }}">STRONA GŁÓWNA</a></li>
+                        <li><a href="{{ path('registration') }}">REJESTRACJA</a></li>
                         <li><a href="{{ path('carpage') }}">SAMOCHODY</a></li>
-                        <li><a href="{{ path('pricepage') }}">CENNIK</a></li>
                         <li><a href="{{ path('detailpage') }}">WARUNKI NAJMU</a></li>
-                        <li><a href="{{ path('placepage') }}">PUNKTY ODBIORU</a></li>
-                        <li><a href="{{ path('contactpage') }}">KONTAKT</a></li>
                     </ul>
 					
                 </div> 
 				
+        </div>
         </div>
             
         {% block content %}
@@ -42,6 +61,12 @@
 		
 		
 		<div id="footer">
+                    <ul id="menu_list">
+                        <li><a href="{{ path('registration') }}">REJESTRACJA</a></li>
+                        <li><a href="{{ path('carpage') }}">SAMOCHODY</a></li>
+                        <li><a href="{{ path('detailpage') }}">WARUNKI NAJMU</a></li>
+                    </ul>
+        Rent a Car: 42-622 Świerklaniec Ul. Romantyczna 11A, 30-214 Kraków Ul. Korzeniowskiego 27, 40-553 Katowice Ul. Orkana 23B/18
 		</div>
 		
 		<div id="companyName"> &copy Wszelkie prawa zastrzeżone Rent a Car sp. z o.o. 2016

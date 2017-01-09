@@ -2,6 +2,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
 * @ORM\Entity
@@ -52,8 +53,20 @@ class Car{
     * * @ORM\Column(type="float")
     */
     private $pojSilnika;
-
     
+    /**
+    * @ORM\OneToMany(targetEntity="OrderCar", mappedBy="car")
+    */
+    private $orderCar;
+    
+    public function __construct(){
+        $this->orderCar=new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return (string)($this->id);
+    }
 
     /**
      * Get id
@@ -224,5 +237,38 @@ class Car{
     public function getPojSilnika()
     {
         return $this->pojSilnika;
+    }
+
+    /**
+     * Add orderCar
+     *
+     * @param \AppBundle\Entity\Order $orderCar
+     * @return Car
+     */
+    public function addOrderCar(\AppBundle\Entity\OrderCar $orderCar)
+    {
+        $this->orderCar[] = $orderCar;
+
+        return $this;
+    }
+
+    /**
+     * Remove orderCar
+     *
+     * @param \AppBundle\Entity\Order $orderCar
+     */
+    public function removeOrderCar(\AppBundle\Entity\OrderCar $orderCar)
+    {
+        $this->orderCar->removeElement($orderCar);
+    }
+
+    /**
+     * Get orderCar
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getOrderCar()
+    {
+        return $this->orderCar;
     }
 }
